@@ -1,0 +1,198 @@
+{
+  "project_info": {
+    "project_number": "313284362971",
+    "project_id": "authentication-8e330",
+    "storage_bucket": "authentication-8e330.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313284362971:android:ebddfc5624cc1ba6b082fe",
+        "android_client_info": {
+          "package_name": "com.example.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKvTVZeejc7xxXrxne11JkKR2D98fljYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313284362971-asdsc7d6pc2krh1ncquf5ggenfb0frm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ziyaAttendanceUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313284362971:android:79c4e2a4f572d80ab082fe",
+        "android_client_info": {
+          "package_name": "com.example.authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313284362971-6v5qienqo1u9hrnbqoi715eppj1c1h52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.authentication",
+            "certificate_hash": "038f4ad0ea83746d2122eb6d7ae7e20251d23eb0"
+          }
+        },
+        {
+          "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKvTVZeejc7xxXrxne11JkKR2D98fljYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313284362971-asdsc7d6pc2krh1ncquf5ggenfb0frm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ziyaAttendanceUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313284362971:android:93fa625e99550721b082fe",
+        "android_client_info": {
+          "package_name": "com.example.phone_number_login_page"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKvTVZeejc7xxXrxne11JkKR2D98fljYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313284362971-asdsc7d6pc2krh1ncquf5ggenfb0frm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ziyaAttendanceUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313284362971:android:7e77a2a9c908146bb082fe",
+        "android_client_info": {
+          "package_name": "com.example.untitled4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKvTVZeejc7xxXrxne11JkKR2D98fljYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313284362971-asdsc7d6pc2krh1ncquf5ggenfb0frm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ziyaAttendanceUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313284362971:android:707f8e7a0b636696b082fe",
+        "android_client_info": {
+          "package_name": "com.example.ziya_attendance_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKvTVZeejc7xxXrxne11JkKR2D98fljYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313284362971-bdtdb612grhmjp1esfo29blpch2l97n7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313284362971-asdsc7d6pc2krh1ncquf5ggenfb0frm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ziyaAttendanceUi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
