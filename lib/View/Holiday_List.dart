@@ -5,8 +5,10 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:ziya_attendance_ui/View/Leaves_view/Leave_Dashboard.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 import 'package:ziya_attendance_ui/widgets/apply_leave_Widgets/ApplyLeaveHeader.dart';
+import 'package:ziya_attendance_ui/widgets/apply_leave_Widgets/Info_Widget.dart';
 
 import '../widgets/Holiday_Widgets/Row_Color_Widget.dart';
+import '../widgets/Holiday_Widgets/buildCalendarBody_widget.dart';
 
 class HolidayList extends StatelessWidget {
   const HolidayList({super.key});
@@ -117,99 +119,7 @@ class HolidayList extends StatelessWidget {
     );
   }
 
-  Widget buildCalendarBody() {
-    final focusedDay = DateTime(2025, 6, 1); // Static for now
 
-    final Map<DateTime, Color> dateColors = {
-      DateTime.utc(2025, 6, 3): Colors.green,
-      DateTime.utc(2025, 6, 12): Colors.green,
-      DateTime.utc(2025, 6, 16): Colors.blue,
-      DateTime.utc(2025, 6, 17): Colors.blue,
-      DateTime.utc(2025, 6, 20): Colors.yellow,
-      DateTime.utc(2025, 6, 25): Colors.blue,
-    };
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Weekday Labels
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Sun",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.red)),
-                Text("Mon", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Tue", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Wed", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Thu", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Fri", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Sat", style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-
-          TableCalendar(
-            focusedDay: focusedDay,
-            firstDay: DateTime.utc(2020, 1, 1),
-            lastDay: DateTime.utc(2030, 12, 31),
-            headerVisible: true,
-            headerStyle: HeaderStyle(
-                formatButtonVisible: false,
-                leftChevronVisible: false,
-                rightChevronVisible: false),
-            daysOfWeekVisible: false,
-            startingDayOfWeek: StartingDayOfWeek.sunday,
-            rowHeight: 48,
-            sixWeekMonthsEnforced: true,
-            calendarStyle: const CalendarStyle(
-              outsideDaysVisible: false,
-              isTodayHighlighted: false,
-              defaultTextStyle: TextStyle(color: Colors.black),
-              weekendTextStyle: TextStyle(color: Colors.red),
-              cellMargin: EdgeInsets.all(4),
-            ),
-            calendarBuilders: CalendarBuilders(
-              defaultBuilder: (context, day, _) {
-                final dateKey = DateTime.utc(day.year, day.month, day.day);
-                final color = dateColors[dateKey];
-
-                return Padding(
-                  padding: const EdgeInsets.all(1),
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: color ?? Colors.transparent,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      '${day.day}',
-                      style: TextStyle(
-                        color: day.weekday == DateTime.sunday
-                            ? Colors.red
-                            : Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   TableRow _buildVerticalRow(String header, List<String> values) {
     return TableRow(

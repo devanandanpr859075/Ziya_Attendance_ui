@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ziya_attendance_ui/View/Punch_In_Punch_Out_View/check%20Face%20Verification%20page.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
+import 'package:ziya_attendance_ui/constants/Text_Constants.dart';
 
 class FaceVerificationScreen extends StatelessWidget {
   final String time;
@@ -24,7 +25,7 @@ class FaceVerificationScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 125),
             const Text(
-              'Face Verification',
+              TextConstants.faceVerificationTitle,
               style: TextStyle(
                 letterSpacing: 2.1,
                 fontSize: 32,
@@ -34,7 +35,7 @@ class FaceVerificationScreen extends StatelessWidget {
             ),
             const SizedBox(height: 1),
             const Text(
-              'Please capture your face',
+              TextConstants.faceVerificationInstruction,
               style: TextStyle(
                 letterSpacing: 1.5,
                 fontSize: 16,
@@ -76,21 +77,23 @@ class FaceVerificationScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CheckFaceVerificationScreen(
-                                  time: time,
-                                  checkIn: checkIn,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckFaceVerificationScreen(
+                          time: time,
+                          checkIn: checkIn,
+                        ),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF03A9F4),
+                    backgroundColor: AppColors.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
                   child: const Text(
-                    'Take Photo',
+                    TextConstants.takePhoto,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,

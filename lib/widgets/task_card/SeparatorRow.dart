@@ -8,10 +8,10 @@ class DashedDividerRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        50,
+        35,
             (index) => const Padding(
           padding: EdgeInsets.symmetric(horizontal: 1),
-          child: Text("-", style: TextStyle(fontSize: 16)),
+          child: Text("_", style: TextStyle(fontSize: 16)),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ziya_attendance_ui/View/Auth_View/Login_Page.dart';
 import 'package:ziya_attendance_ui/View/MainNavigationPage.dart';
+import 'package:ziya_attendance_ui/controller/Auth_Controller.dart';
 import 'package:ziya_attendance_ui/controller/Shared_Preference_Helper.dart';
 import 'package:ziya_attendance_ui/models/CheckIn_Model.dart';
 
@@ -17,6 +18,9 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CheckInModel()),
+        ChangeNotifierProvider(create: (_) => SignupController()),
+        ChangeNotifierProvider(create: (_) => LoginController()),
+        ChangeNotifierProvider(create: (_) => ForgotPasswordController()),
       ],
       child: MyApp(isLoggedIn: isLoggedIn),
     ),

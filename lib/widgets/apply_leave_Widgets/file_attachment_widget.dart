@@ -8,18 +8,14 @@ class FileAttachmentField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      color: AppColors.backgroundColor,
-      child: InkWell(
-        onTap: onTap,
-        child: InputDecorator(
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.attach_file),
-            border: InputBorder.none,
-          ),
-          child: const Text("Choose file"),
+    return InkWell(
+      onTap: onTap,
+      child: InputDecorator(
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.attach_file),
+          border: InputBorder.none,
         ),
+        child: const Text("Choose file"),
       ),
     );
   }

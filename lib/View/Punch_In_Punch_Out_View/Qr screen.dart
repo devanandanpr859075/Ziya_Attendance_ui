@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ziya_attendance_ui/View/Punch_In_Punch_Out_View/check%20Face%20Verification%20page.dart';
-import '../../constants/Text_Constants.dart'; // ✅ Import constants
+import '../../constants/Text_Constants.dart';
 
 class QRScreen extends StatelessWidget {
   final String time;

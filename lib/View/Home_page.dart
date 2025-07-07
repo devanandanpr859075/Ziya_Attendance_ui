@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ziya_attendance_ui/View/Dashboard_Attendance_View/Dashboard_Attendance_View.dart';
 import 'package:ziya_attendance_ui/View/Holiday_List.dart';
+import 'package:ziya_attendance_ui/View/Leave_Status_View.dart';
+import 'package:ziya_attendance_ui/View/Pay_Slip_View.dart';
+import 'package:ziya_attendance_ui/View/Reports_View.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 import 'package:ziya_attendance_ui/constants/Text_Constants.dart';
 import 'package:ziya_attendance_ui/controller/Shared_Preference_Helper.dart';
+import 'package:ziya_attendance_ui/models/CheckIn_Model.dart';
 import 'package:ziya_attendance_ui/widgets/Home_page_Widgets/click_Out%20Section.dart';
 import 'package:ziya_attendance_ui/widgets/Task_view_Sections/TaskSectionWidget.dart';
 import 'package:ziya_attendance_ui/widgets/Home_page_Widgets/ProfileHeader.dart';
@@ -38,6 +43,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final checkInModel = Provider.of<CheckInModel>(context);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
@@ -63,34 +70,48 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 16),
                 const CheckInCard(),
                 const SizedBox(height: 24),
-                const Text(TextConstants.overview,
-                    style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text(
+                  TextConstants.overview,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     OverviewItem(
-                        label: TextConstants.presence,
-                        count: "20",
-                        color: AppColors.profileHeader_2),
+                      label: TextConstants.presence,
+                      count: "20",
+                      color: AppColors.profileHeader_2,
+                    ),
                     const SizedBox(width: 12),
                     OverviewItem(
-                        label: TextConstants.absence,
-                        count: "03",
-                        color: AppColors.Textred),
+                      label: TextConstants.absence,
+                      count: "03",
+                      color: AppColors.Textred,
+                    ),
                     const SizedBox(width: 12),
                     OverviewItem(
-                        label: TextConstants.leaves,
-                        count: "02",
-                        color: AppColors.orange),
+                      label: TextConstants.leaves,
+                      count: "02",
+                      color: AppColors.orange,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                const TaskSectionWidget(),
+                checkInModel.isCheckedIn
+                    ? const TaskSectionWidget()
+                    : Container(
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "No task availabl. Please punch in first.",
+                    style: TextStyle(color: AppColors.hintColor),
+                  ),
+                ),
                 const SizedBox(height: 28),
-                const Text(TextConstants.dashboard,
-                    style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text(
+                  TextConstants.dashboard,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 16),
                 GridView.count(
                   crossAxisCount: 3,
@@ -99,47 +120,48 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
                   children: [
-                    DashboardItem(
-                        icon: Icons.calendar_today,
-                        label: TextConstants.attendance,
-                        color: AppColors.profileHeader_2,
-                        tap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return AttendanceCalendarPage();
-                          }));
-                        }),
-                    DashboardItem(
-                        icon: Icons.logout,
-                        label: TextConstants.leaves,
-                        color: AppColors.orange,
-                        tap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LeavesScreen()));
-                        }),
-                    DashboardItem(
-                        icon: Icons.fact_check,
-                        label: TextConstants.leaveStatus,
-                        color: Colors.purple,
-                        tap: () {}),
-                    DashboardItem(
-                        icon: Icons.event_note,
-                        label: TextConstants.holidayList,
-                        color: Colors.indigo,
-                        tap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){return HolidayList();}));
-                        }),
-                    DashboardItem(
-                        icon: Icons.receipt_long,
-                        label: TextConstants.payslip,
-                        color: Colors.teal,
-                        tap: () {}),
-                    DashboardItem(
-                        icon: Icons.bar_chart,
-                        label: TextConstants.reports,
-                        color: Colors.redAccent,
-                        tap: () {}),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.calendar_month,
+                      label: TextConstants.attendance,
+                      color: Colors.greenAccent.withOpacity(0.9),
+                      destination: const AttendanceCalendarPage(),
+                    ),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.logout,
+                      label: TextConstants.leaves,
+                      color: AppColors.orange,
+                      destination: const LeavesScreen(),
+                    ),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.fact_check,
+                      label: TextConstants.leaveStatus,
+                      color: AppColors.DashboardItem,
+                      destination: const LeaveStatusView(),
+                    ),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.event_note,
+                      label: TextConstants.holidayList,
+                      color: AppColors.profileHeader,
+                      destination: const HolidayList(),
+                    ),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.receipt_long,
+                      label: TextConstants.payslip,
+                      color: AppColors.secondaryGreen,
+                      destination:  PaySlipView(),
+                    ),
+                    _buildDashboardItem(
+                      isEnabled: checkInModel.isCheckedIn,
+                      icon: Icons.bar_chart,
+                      label: TextConstants.reports,
+                      color: AppColors.redAccent,
+                      destination: const Reports_View(),
+                    ),
                   ],
                 ),
               ],
@@ -147,6 +169,34 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildDashboardItem({
+    required bool isEnabled,
+    required IconData icon,
+    required String label,
+    required Color color,
+    required Widget destination,
+  }) {
+    return DashboardItem(
+      icon: icon,
+      label: label,
+      color: isEnabled ? color : color,
+      tap: isEnabled
+          ? () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => destination));
+      }
+          : () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content:
+            Text("Please punch in to access this feature."),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      },
     );
   }
 }

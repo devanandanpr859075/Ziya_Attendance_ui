@@ -61,8 +61,8 @@ class _Punchin_SuccessfullState extends State<Punchin_Successfull>
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.white,
-              Colors.white,
+             AppColors.backgroundColor,
+              AppColors.backgroundColor,
               statusColor.withOpacity(0.8)
             ],
             begin: Alignment.topCenter,

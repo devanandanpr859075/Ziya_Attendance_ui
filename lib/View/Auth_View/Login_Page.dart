@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
+import 'package:ziya_attendance_ui/constants/Text_Constants.dart';
 import 'package:ziya_attendance_ui/View/Auth_View/Forgot_Password_Page.dart';
 import 'package:ziya_attendance_ui/View/Auth_View/Signup_Page.dart';
 import 'package:ziya_attendance_ui/controller/Auth_Controller.dart';
@@ -16,22 +18,21 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool _isLoading = false;
 
-  final LoginController controller = LoginController();
-
-  void _handleLogin() {
-    final model = LoginModel(
-      email: emailController.text,
-      password: passwordController.text,
+  void _handleLogin(BuildContext context) {
+    final loginModel = LoginModel(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
     );
+
+    final controller = Provider.of<LoginController>(context, listen: false);
 
     controller.login(
       context: context,
       formKey: _formKey,
-      loginModel: model,
-      onStart: () => setState(() => _isLoading = true),
-      onComplete: () => setState(() => _isLoading = false),
+      loginModel: loginModel,
+      onStart: () => controller.setLoading(true),
+      onComplete: () => controller.setLoading(false),
     );
   }
 
@@ -44,35 +45,18 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<LoginController>(context);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: Stack(
         children: [
-          // Decorative Circles
-          Positioned(
-            top: -260,
-            left: -100,
-            child: _buildCircle(400, Colors.green),
-          ),
-          Positioned(
-            top: -200,
-            left: -170,
-            child: _buildCircle(400, Colors.blueAccent),
-          ),
-          Positioned(
-            bottom: -270,
-            right: -80,
-            child: _buildCircle(300, const Color(0xFF4CAF50)),
-          ),
-          Positioned(
-            bottom: -300,
-            right: -240,
-            child: _buildCircle(400, Color(0xFF88c347)),
-          ),
+          Positioned(top: -260, left: -100, child: _buildCircle(400, AppColors.punchInColor)),
+          Positioned(top: -200, left: -170, child: _buildCircle(400, AppColors.primaryColor)),
+          Positioned(bottom: -270, right: -80, child: _buildCircle(300, AppColors.successGreen)),
+          Positioned(bottom: -300, right: -240, child: _buildCircle(400, AppColors.secondaryGreen)),
 
-          // Foreground Content
           SafeArea(
             child: SingleChildScrollView(
               child: ConstrainedBox(
@@ -87,52 +71,44 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'ZiyaAttend',
+                          Text(
+                            TextConstants.appName,
                             style: TextStyle(
                               fontSize: 42,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: AppColors.textBlack,
                             ),
                           ),
-                          const Text(
-                            'Smart Attendance Maintainer',
-                            style: TextStyle(color: Colors.green, fontSize: 20,fontWeight: FontWeight.w500),
+                          const SizedBox(height: 4),
+                          Text(
+                            TextConstants.appSubtitle,
+                            style: TextStyle(
+                              color: AppColors.subtitleGreen,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           const SizedBox(height: 30),
 
-                          _buildInputField(
-                            emailController,
-                            'Email',
-                            inputType: TextInputType.emailAddress,
-                          ),
+                          _buildInputField(emailController, TextConstants.email, inputType: TextInputType.emailAddress),
                           const SizedBox(height: 16),
-                          _buildInputField(
-                            passwordController,
-                            'Password',
-                            obscure: true,
-                          ),
+                          _buildInputField(passwordController, TextConstants.password, obscure: true),
                           const SizedBox(height: 5),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                        const ForgotPasswordPage()),
-                                  );
-                                },
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: TextStyle(
-                                      color: Colors.red.withOpacity(0.8)),
-                                ),
-                              )
-                            ],
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (_) => const ForgotPasswordPage()),
+                                );
+                              },
+                              child: Text(
+                                TextConstants.forgotPassword,
+                                style: TextStyle(color: AppColors.Textred.withOpacity(0.8)),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 20),
 
@@ -140,21 +116,16 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             height: 60,
                             child: ElevatedButton(
-                              onPressed: _isLoading ? null : _handleLogin,
+                              onPressed: controller.isLoading ? null : () => _handleLogin(context),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                backgroundColor: AppColors.primaryColor,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
-                              child: _isLoading
-                                  ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
+                              child: controller.isLoading
+                                  ? const CircularProgressIndicator(color: AppColors.cardColor)
                                   : const Text(
-                                'Login',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                                TextConstants.login,
+                                style: TextStyle(fontSize: 16, color: AppColors.cardColor),
                               ),
                             ),
                           ),
@@ -164,23 +135,17 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (_) => const SignupPage()),
+                                MaterialPageRoute(builder: (_) => const SignupPage()),
                               );
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text("Don't have an account?",
-                                    style: TextStyle(color: Colors.black)),
-                                Text(" Sign Up",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
+                              children: [
+                                const Text(TextConstants.dontHaveAccount, style: TextStyle(color: AppColors.textBlack)),
+                                const Text(TextConstants.signUp, style: TextStyle(color: AppColors.textBlack, fontSize: 20)),
                               ],
                             ),
                           ),
-
-
                         ],
                       ),
                     ),
@@ -206,32 +171,28 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: obscure,
       validator: (val) {
         if (val == null || val.isEmpty) return "Enter $hintText";
-        if (hintText == 'Email' && !val.contains('@')) return "Enter a valid email";
-        if (hintText == 'Password' && val.length < 6)
-          return "Password must be at least 6 characters";
+        if (hintText == TextConstants.email && !val.contains('@')) return TextConstants.enterValidEmail;
+        if (hintText == TextConstants.password && val.length < 6) return TextConstants.passwordLength;
         return null;
       },
       decoration: InputDecoration(
         hintText: hintText,
-        contentPadding:
-        const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         hintStyle: const TextStyle(fontSize: 16),
         filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        fillColor: AppColors.cardColor,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.grey),
+          borderSide: const BorderSide(color: AppColors.lightGrey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide:  BorderSide(color: AppColors.primaryColor),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: AppColors.errorRed),
         ),
       ),
     );
@@ -243,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: color
+        color: color,
       ),
     );
   }

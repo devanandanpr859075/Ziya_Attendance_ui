@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ziya_attendance_ui/View/Home_Page.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 
 class ApplyLeaveHeader extends StatelessWidget {
@@ -70,8 +69,8 @@ class ApplyLeaveHeader extends StatelessWidget {
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
+                    decoration:  BoxDecoration(
+                      color: AppColors.redAccent,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -92,7 +91,6 @@ class ApplyLeaveHeader extends StatelessWidget {
     );
   }
 
-  // Search Dropdown Dialog
   void showSearchDropdown(BuildContext context) {
     showGeneralDialog(
       context: context,
@@ -108,7 +106,7 @@ class ApplyLeaveHeader extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ziya_attendance_ui/View/Leaves_view/Leave_Dashboard.dart';
 import 'package:ziya_attendance_ui/View/Leaves_view/Leave_screen.dart';
+import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 import 'package:ziya_attendance_ui/widgets/apply_leave_Widgets/ApplyLeaveHeader.dart';
 
 class LeavesScreen extends StatefulWidget {
@@ -68,7 +69,7 @@ class _LeavesScreenState extends State<LeavesScreen> {
             label,
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              color: isSelected ? Colors.blue : Colors.black54,
+              color: isSelected ? AppColors.primaryColor : AppColors.topTextcolor,
             ),
           ),
         ],

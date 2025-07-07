@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 
 class DashboardItem extends StatelessWidget {
   final IconData icon;
@@ -13,7 +14,7 @@ class DashboardItem extends StatelessWidget {
     return GestureDetector(
       onTap: tap,
       child: Card(
-        color: Colors.white,
+        color: AppColors.backgroundColor,
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Center(

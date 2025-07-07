@@ -69,7 +69,6 @@ class Tasks_pg extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Top Row: Title + Progress %
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -93,7 +92,6 @@ class Tasks_pg extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Status row
           Row(
             children: [
               const Text(
@@ -111,7 +109,6 @@ class Tasks_pg extends StatelessWidget {
           ),
           const SizedBox(height: 6),
 
-          // Dates row
           Row(
             children: [
               const Text(
@@ -166,7 +163,6 @@ class Tasks_pg extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // TODO: Handle tap
                   },
                   child: Text(_getButtonLabel(status)),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ziya_attendance_ui/View/Punch_In_Punch_Out_View/Punch%20in%20successfull_page.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
+import 'package:ziya_attendance_ui/constants/Text_Constants.dart';
 
 class CheckFaceVerificationScreen extends StatefulWidget {
   final String time;
@@ -37,25 +38,19 @@ class _CheckFaceVerificationScreenState
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.white,
-                    Color(0xFFEAF6FF),
-                    Color(0xFFB3E5FC),
-                    Color(0xFF03A9F4),
-                  ],
+                  colors: AppColors.faceVerificationGradient,
                   stops: [0.0, 0.23, 0.5, 1.0],
                 ),
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                      children: const [
+                      children:  [
                         Text(
-                          "Center your face",
+                          TextConstants.faceTitle,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -65,7 +60,7 @@ class _CheckFaceVerificationScreenState
                         ),
                         SizedBox(height: 4),
                         Text(
-                          "point your face right at the box,\nthen take a photo",
+                          TextConstants.faceSubtitle,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18,
@@ -75,31 +70,30 @@ class _CheckFaceVerificationScreenState
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _iconButton(icon: Icons.camera_alt),
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Punchin_Successfull(
-                                            time: widget.time,
-                                            checkIn: widget.checkIn,
-                                          )));
-                            },
-                            child: _mainActionButton()),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Punchin_Successfull(
+                                  time: widget.time,
+                                  checkIn: widget.checkIn,
+                                ),
+                              ),
+                            );
+                          },
+                          child: _mainActionButton(),
+                        ),
                         _iconButton(icon: Icons.flash_on),
                       ],
                     ),
-                    SizedBox(
-                      height: 5,
-                    )
+                    const SizedBox(height: 5),
                   ],
                 ),
               ),

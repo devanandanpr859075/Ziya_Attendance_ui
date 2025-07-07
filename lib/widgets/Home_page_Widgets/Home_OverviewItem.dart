@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 
 class OverviewItem extends StatelessWidget {
   final String label, count;
@@ -10,7 +11,7 @@ class OverviewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
-        color: Colors.white,
+        color: AppColors.backgroundColor,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(

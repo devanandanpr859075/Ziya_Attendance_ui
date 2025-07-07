@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
 
 class SubmitButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -19,11 +20,11 @@ class SubmitButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: AppColors.primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            elevation: 0, // Card handles elevation
+            elevation: 0,
           ),
           child: const Text(
             "Submit",

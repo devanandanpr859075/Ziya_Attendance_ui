@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:ziya_attendance_ui/constants/Color%20Constants.dart';
+import 'package:ziya_attendance_ui/constants/Text_Constants.dart';
+import 'package:ziya_attendance_ui/widgets/Leave_status_Widgets/leave_overview_card.dart';
+import 'package:ziya_attendance_ui/widgets/apply_leave_Widgets/Info_Widget.dart';
 
 class LeaveDashboard extends StatelessWidget {
   const LeaveDashboard({super.key});
@@ -26,7 +29,7 @@ class LeaveDashboard extends StatelessWidget {
                 childAspectRatio: 1.20,
                 children: const [
                   InfoCard(
-                    title: "Total Leave Taken",
+                    title: TextConstants.totalLeaveTaken,
                     value: "16 days",
                     subtitle: "29 days remaining this year",
                     rowsub: '',
@@ -35,7 +38,7 @@ class LeaveDashboard extends StatelessWidget {
                     progress: 0.36,
                   ),
                   InfoCard(
-                    title: "Approval Rate",
+                    title: TextConstants.approvalRate,
                     rowsub: '',
                     value: "92%",
                     subtitle: "29 days remaining this year",
@@ -43,14 +46,14 @@ class LeaveDashboard extends StatelessWidget {
                   ),
                   InfoCard(
                     rowsub: '',
-                    title: "Pending Request",
+                    title: TextConstants.pendingRequest,
                     value: "1",
                     subtitle: "29 days remaining this year",
                     icon: Iconsax.timer,
                   ),
                   InfoCard(
                     rowsub: '',
-                    title: "Team Member on Leave",
+                    title: TextConstants.teamMemberOnLeave,
                     value: "2",
                     subtitle: "29 days remaining this year",
                     icon: Icons.group,
@@ -58,93 +61,7 @@ class LeaveDashboard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 28),
-              Card(
-                color: AppColors.backgroundColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Leave Overview",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      const SizedBox(height: 4),
-                      const Text(
-                        "Your leave distribution for the current year",
-                        style: TextStyle(fontSize: 13, color: Colors.grey),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        height: 80,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _bar("Q1", 50),
-                            _bar("Q2", 30),
-                            _bar("Q3", 20),
-                            _bar("Q4", 10),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.circle, size: 8, color: Colors.blue),
-                          SizedBox(width: 6),
-                          Text(
-                            "Leave days taken",
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                      const Divider(height: 32),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Total days",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                "23",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Remaining",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                "23",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              buildLeaveOverviewCard(),
               const SizedBox(height: 12),
               Card(
                 elevation: 3,
@@ -153,7 +70,7 @@ class LeaveDashboard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.cardColor,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -166,50 +83,33 @@ class LeaveDashboard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Upcoming Leave",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
+                      const Text(TextConstants.upcomingLeave,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                       const SizedBox(height: 4),
-                      const Text(
-                        "Your scheduled time off",
-                        style: TextStyle(fontSize: 13, color: Colors.grey),
-                      ),
+                      const Text(TextConstants.scheduledTimeOff,
+                          style: TextStyle(fontSize: 13, color: Colors.grey)),
                       const SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
+                          const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Annual Leave",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 14),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                "April 22, 2025 to Apr 24, 2025 (3 days)",
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.black87),
-                              ),
+                              Text(TextConstants.annualLeave,
+                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                              SizedBox(height: 4),
+                              Text(TextConstants.leaveDateRange,
+                                  style: TextStyle(fontSize: 13, color: Colors.black87)),
                             ],
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 4),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: const Text(
-                                "Pending",
-                                style: TextStyle(fontSize: 12),
-                              ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: AppColors.leavePendingBorder),
                             ),
+                            child: const Text(TextConstants.pending,
+                                style: TextStyle(fontSize: 12)),
                           ),
                         ],
                       ),
@@ -218,19 +118,17 @@ class LeaveDashboard extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFF5DC),
+                          color: AppColors.leavePendingNoteBg,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
-                          children: const [
-                            Icon(Icons.info_outline,
-                                size: 20, color: Colors.orange),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.info_outline, size: 20, color: AppColors.leavePendingIcon),
                             SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                "Your leave request is awaiting manager approval.",
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.black87),
+                                TextConstants.leavePendingNote,
+                                style: TextStyle(fontSize: 13, color: Colors.black87),
                               ),
                             ),
                           ],
@@ -239,7 +137,7 @@ class LeaveDashboard extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -255,7 +153,7 @@ class LeaveDashboard extends StatelessWidget {
           height: height,
           width: 70,
           decoration: BoxDecoration(
-            color: const Color(0xFF03A9F4),
+            color: AppColors.leaveProgressBlue,
             borderRadius: BorderRadius.circular(2),
             boxShadow: [
               BoxShadow(
@@ -270,98 +168,6 @@ class LeaveDashboard extends StatelessWidget {
         Text(label,
             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
       ],
-    );
-  }
-}
-
-class InfoCard extends StatelessWidget {
-  final String title, value, subtitle;
-  final IconData icon;
-  final bool showProgress;
-  final double progress;
-  final String? rowsub;
-
-  const InfoCard({
-    super.key,
-    required this.title,
-    required this.value,
-    required this.subtitle,
-    required this.icon,
-    this.showProgress = false,
-    this.progress = 0.0,
-    this.rowsub,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.backgroundColor,
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-                Icon(icon, size: 18, color: Colors.blue),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  rowsub!,
-                  style: TextStyle(fontSize: 10, letterSpacing: 1),
-                )
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 11,
-                color: Colors.grey,
-              ),
-            ),
-            if (showProgress) ...[
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: progress,
-                  minHeight: 6,
-                  backgroundColor: Colors.blue.shade100,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-                ),
-              ),
-            ]
-          ],
-        ),
-      ),
     );
   }
 }
